@@ -1,0 +1,21 @@
+# Swap Interfaces
+
+- name: Create Swap Interfaces tool
+  become: yes
+  copy:
+    src: files/cluster/swap_interfaces.bash 
+    dest: /usr/HD
+
+- name: Install swap_interfaces
+  become: yes
+  file:
+    src: /usr/HD/swap_interfaces.bash
+    path: /usr/bin/swap
+    state: link
+
+# Version Update
+
+- name: Update version
+  import_tasks: util/update_version.yaml
+  vars:
+    version: '3.2.2'
